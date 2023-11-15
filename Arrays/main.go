@@ -44,4 +44,8 @@ func main() {
 	// Also for 2d array you can declare and initialize in one line.
 	twoDTwo := [2][3]int{{1, 2, 3}, {1, 3, 5}}
 	fmt.Println("2d2:", twoDTwo)
+	fmt.Printf("%T\n", twoDTwo) //[2][3]int
+
+	c := [...]string{"Penn", "Teller"} // compiler count the array elements for you
+	fmt.Printf("arr: %v, type: %T\n", c, c)
 }
