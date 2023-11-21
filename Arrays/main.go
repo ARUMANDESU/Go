@@ -49,3 +49,20 @@ func main() {
 	c := [...]string{"Penn", "Teller"} // compiler count the array elements for you
 	fmt.Printf("arr: %v, type: %T\n", c, c)
 }
+
+func Sum(numbers []int) (sum int) {
+	for _, num := range numbers {
+		sum += num
+	}
+	return
+}
+
+func SumAll(numsToSum ...[]int) []int {
+	sum := make([]int, len(numsToSum))
+
+	for i, nums := range numsToSum {
+		sum[i] = Sum(nums)
+	}
+
+	return sum
+}
