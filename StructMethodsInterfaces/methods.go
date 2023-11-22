@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package structmethodsinterfaces
 
 // Go supports methods defined on struct types.
 
@@ -17,7 +15,7 @@ func (r *rect) perim() int {
 	return 2*r.width + 2*r.height
 }
 
-func main() {
+/*func main() {
 
 	r := rect{width: 10, height: 5}
 
@@ -31,3 +29,4 @@ func main() {
 	fmt.Println("area: ", rp.area())
 	fmt.Println("perim: ", rp.perim())
 }
+*/

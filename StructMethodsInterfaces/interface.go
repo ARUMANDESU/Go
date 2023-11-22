@@ -1,4 +1,4 @@
-package main
+package structmethodsinterfaces
 
 import (
 	"fmt"
@@ -48,7 +48,8 @@ func measure(g Geometry) {
 	fmt.Println(g.area())
 	fmt.Println(g.perim())
 }
-func main() {
+
+/*func main() {
 
 	r := Rect{width: 3, height: 4}
 	c := circle{radius: 5}
@@ -57,3 +58,4 @@ func main() {
 	measure(r)
 	measure(c)
 }
+*/

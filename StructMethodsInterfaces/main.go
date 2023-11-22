@@ -1,4 +1,4 @@
-package main
+package structmethodsinterfaces
 
 import (
 	"fmt"
@@ -101,7 +101,7 @@ type container struct {
 	str string
 }
 
-func main() {
+/*func main() {
 
 	co := container{
 		base: base{num: 1},
@@ -126,4 +126,4 @@ func main() {
 	//Here we see that a container now implements the describer interface because it embeds base.
 	var d describer = co
 	fmt.Println("describer:", d.describe())
-}
+}*/

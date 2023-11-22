@@ -70,7 +70,7 @@ func worker(done chan bool) {
 // This specificity increases the type-safety of the program.
 
 // This ping function only accepts a channel for sending values.
-// it would be a compile-time error to try to receive on this channel.
+// it would be a compile-time errors to try to receive on this channel.
 func ping(pings chan<- string, msg string) {
 	pings <- msg
 }
