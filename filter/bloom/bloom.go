@@ -13,8 +13,6 @@ type FilterConfig struct {
 	size int
 	// hashes is number of times to hash data
 	hashes int
-	// hasher is hash function
-	hasher Hasher
 }
 
 // Filter is bloom filter
@@ -28,11 +26,11 @@ type Filter struct {
 	// hashes is number of times to hash data
 	hashes int
 
-	hasher Hasher
+	hashers []Hasher
 }
 
 type Hasher interface {
-	Hash([]byte) int
+	Hash([]byte) uint
 }
 
 // New return Bloom Filter instance
@@ -43,32 +41,32 @@ func New(cfg FilterConfig) (*Filter, error) {
 	if cfg.size <= 0 {
 		return nil, ErrInvalidSize
 	}
+	hashers := []Hasher{&MurmurHasher{}, &FNVHasher{}}
 
-	// If hasher is nil, use MurmurHasher by default
-	if cfg.hasher == nil {
-		cfg.hasher = &MurmurHasher{}
+	if cfg.hashes > len(hashers) {
+		return nil, errors.New("number of hashes is too larger")
 	}
 
 	return &Filter{
-		bits:   make([]bool, cfg.size),
-		hashes: cfg.hashes,
-		hasher: cfg.hasher,
+		bits:    make([]bool, cfg.size),
+		hashes:  cfg.hashes,
+		hashers: hashers,
 	}, nil
 }
 
 func (f *Filter) Insert(data []byte) {
 	for i := 0; i < f.hashes; i++ {
-		hash := f.hasher.Hash(data)
-		f.bits[hash%len(f.bits)] = true
+		hash := f.hashers[i].Hash(data)
+		f.bits[hash%uint(len(f.bits))] = true
 	}
 	f.inserted++
 }
 
 func (f *Filter) LookUp(data []byte) bool {
 	for i := 0; i < f.hashes; i++ {
-		hash := f.hasher.Hash(data)
+		hash := f.hashers[i].Hash(data)
 
-		if f.bits[hash%len(f.bits)] == false {
+		if f.bits[hash%uint(len(f.bits))] == false {
 			return false
 		}
 	}
