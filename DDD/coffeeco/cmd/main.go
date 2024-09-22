@@ -57,8 +57,9 @@ func main() {
 			ID: uuid.New(),
 		},
 		ProductsToPurchase: []coffeeco.Product{{
-			ItemName:  "item1",
-			BasePrice: *money.New(3300, "USD"),
+			ItemName:  "Coffee",
+			BasePrice: *money.New(500, "USD"), // $5.00
+			Size:      coffeeco.PRODUCT_SIZE_LARGE,
 		}},
 		PaymentMeans: payment.MEANS_CARD,
 	}
